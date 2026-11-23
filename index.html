@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marketplace</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha384-PPIZEGYM1v8zp5Py7UjFb79S58UeqCL9pYVnVPURKEqvioPROaVAJKKLzvH2rDnI" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js" integrity="sha384-D/t0ZMqQW31H3az8ktEiNb39wyKnS82iFY52QPACM+IjKW3jDUhyIgh2PApRqJZs" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+
+  <header>
+    <img id="header-logo" class="header-logo" alt="" />
+    <div class="header-right">
+      <button class="icon-btn search-btn" data-label-title="search"><i class="fas fa-search" style="color: white;"></i></button>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <button class="icon-btn filter-btn" data-label-title="filters">☰</button>
+      </div>
+      <div class="sidebar-middle">
+        <h2 class="sidebar-title" data-label="floors"></h2>
+        <div class="filters" id="floor-buttons"><!-- generated from config.floors --></div>
+      </div>
+      <div class="sidebar-bottom">
+        <button class="icon-btn settings-btn" data-label-title="settingsTitle"><i class="fas fa-cog"></i></button>
+        <button class="icon-btn sos-btn" data-label-title="contactTitle"><i class="fas fa-phone"></i></button>
+      </div>
+    </aside>
+
+    <main class="content">
+      <div class="content-scroll">
+        <div id="shop-grid"></div>
+      </div>
+      <div class="pagination">
+        <button id="prev-page" class="pagination-btn" data-label="previous"></button>
+        <span id="page-info" class="page-info"></span>
+        <button id="next-page" class="pagination-btn" data-label="next"></button>
+      </div>
+    </main>
+  </div>
+
+  <!-- Shop detail -->
+  <div id="shop-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div id="filter-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-btn" id="close-filter">&times;</span>
+      <h2 style="margin-top: 0;" data-label="filterTitle"></h2>
+
+      <div class="modal-section">
+        <label data-label="status"></label>
+        <div>
+          <label><input type="radio" name="status" value="all" checked> <span data-label="all"></span></label><br>
+          <label><input type="radio" name="status" value="Open"> <span data-label="open"></span></label><br>
+          <label><input type="radio" name="status" value="Closed"> <span data-label="closed"></span></label>
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <label data-label="price"></label>
+        <div>
+          <label><input type="checkbox" name="price" value="1"> $</label><br>
+          <label><input type="checkbox" name="price" value="2"> $$</label><br>
+          <label><input type="checkbox" name="price" value="3"> $$$</label>
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <label data-label="categories"></label>
+        <div id="category-options"></div>
+      </div>
+
+      <div class="modal-section" style="display: flex; gap: 0.5rem;">
+        <button id="apply-filter" class="direction-btn" style="flex: 1;" data-label="apply"></button>
+        <button id="reset-filter" class="direction-btn" style="flex: 1; background: #ccc; color: #000;" data-label="reset"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search -->
+  <div id="search-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-btn" id="close-search">&times;</span>
+      <h2 style="margin-top: 0;" data-label="searchTitle"></h2>
+      <div class="modal-section">
+        <input type="text" id="search-input" />
+      </div>
+      <div id="search-results"></div>
+    </div>
+  </div>
+
+  <!-- Settings -->
+  <div id="settings-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-btn" id="close-settings">&times;</span>
+      <h2 data-label="settingsTitle"></h2>
+      <p data-label="settingsText"></p>
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <div id="sos-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-btn" id="close-sos">&times;</span>
+      <h2 data-label="contactTitle"></h2>
+      <p><span data-label="contactText"></span><br>
+        <strong id="contact-email"></strong><br>
+        <span id="contact-phone"></span></p>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="scripts/app.js"></script>
+</body>
+</html>
